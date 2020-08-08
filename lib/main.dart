@@ -52,11 +52,14 @@ class _MyHomePageState extends State<MyHomePage> {
               leading: Icon(Icons.vpn_key),
               title: Text(titleList[index]),
               onTap: () async {
+                final _idList = accountMap.keys.toList();
+                final _passList = accountMap.values.toList();
                 final result = await Navigator.push(
                     // 画面をStack構造で管理する
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ConfPassword(index)));
+                        builder: (context) => ConfPassword(
+                            index, _idList[index], _passList[index])));
                 if (result != null) {
                   setState(() {
                     _mapTest();
