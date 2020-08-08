@@ -14,7 +14,9 @@ class _AddPasswordState extends State<AddPassword> {
   final double editingGuideSize = 100;
   final double standardInterval = 30.0;
   final double shortInterval = 5.0;
+  List _popList = new List();
   var _showPassword = true; // 表示切替
+  var _idController = TextEditingController();
   var _passwordController = TextEditingController(); // password value
   var _titleController = TextEditingController(); // title value
 
@@ -53,6 +55,7 @@ class _AddPasswordState extends State<AddPassword> {
                 Container(
                   width: textFieldWidth,
                   child: TextField(
+                    controller: _idController,
                     decoration:
                         InputDecoration(labelText: "ID", hintText: "ex) asas"),
                   ),
@@ -142,5 +145,13 @@ class _AddPasswordState extends State<AddPassword> {
   }
 
   // 一つ前の画面に戻る
-  void _basckScreen() => Navigator.of(context).pop(_titleController.text);
+  void _basckScreen() {
+    _popList.add(_titleController.text);
+
+    _popList.add(_idController.text);
+
+    _popList.add(_passwordController.text);
+
+    Navigator.of(context).pop(_popList);
+  }
 }
