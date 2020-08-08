@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 
 class AddPassword extends StatefulWidget {
-  final String title;
-
-  AddPassword(this.title);
+//  final String title;
+//
+//  AddPassword(this.title);
 
   @override
   _AddPasswordState createState() => _AddPasswordState();
 }
 
 class _AddPasswordState extends State<AddPassword> {
+  final double textFieldWidth = 250;
+  final double editingGuideSize = 100;
+  final double standardInterval = 30.0;
+  final double shortInterval = 5.0;
   var _showPassword = true; // 表示切替
-  var _passwordController = TextEditingController(); // 入力値や選択領域を取得する
+  var _passwordController = TextEditingController(); // password value
+  var _titleController = TextEditingController(); // title value
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +25,7 @@ class _AddPasswordState extends State<AddPassword> {
         title: Text("パスワード追加"),
       ),
       body: Padding(
-        padding: EdgeInsets.all(30.0),
+        padding: EdgeInsets.all(standardInterval),
         child: Column(
           // 縦
           children: <Widget>[
@@ -29,8 +34,9 @@ class _AddPasswordState extends State<AddPassword> {
               children: <Widget>[
                 _editingGuide('タイトル'),
                 Container(
-                  width: 250,
+                  width: textFieldWidth,
                   child: TextField(
+                    controller: _titleController,
                     decoration: InputDecoration(
                         labelText: "Title Name", hintText: "ex) GitHubAccount"),
                   ),
@@ -38,14 +44,14 @@ class _AddPasswordState extends State<AddPassword> {
               ],
             ),
 
-            _margin(5.0),
+            _margin(shortInterval),
 
             Row(
               // 横
               children: <Widget>[
                 _editingGuide('ID'),
                 Container(
-                  width: 250,
+                  width: textFieldWidth,
                   child: TextField(
                     decoration:
                         InputDecoration(labelText: "ID", hintText: "ex) asas"),
@@ -54,14 +60,14 @@ class _AddPasswordState extends State<AddPassword> {
               ],
             ),
 
-            _margin(5.0),
+            _margin(shortInterval),
 
             Row(
               // 横
               children: <Widget>[
                 _editingGuide('パスワード'),
                 Container(
-                  width: 250,
+                  width: textFieldWidth,
                   child: TextField(
                     // password用の見えない処理
                     obscureText: _showPassword,
@@ -78,7 +84,7 @@ class _AddPasswordState extends State<AddPassword> {
               ],
             ),
 
-            _margin(30.0),
+            _margin(standardInterval),
 
             // 追加ボタン
             _addButton("追加", Colors.white),
@@ -103,7 +109,7 @@ class _AddPasswordState extends State<AddPassword> {
   ///
   Widget _editingGuide(String text) {
     return Container(
-      width: 100,
+      width: editingGuideSize,
       child: Text(text),
     );
   }
@@ -129,7 +135,12 @@ class _AddPasswordState extends State<AddPassword> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          onPressed: () {},
+          onPressed: () {
+            _basckScreen();
+          },
         ));
   }
+
+  // 一つ前の画面に戻る
+  void _basckScreen() => Navigator.of(context).pop(_titleController.text);
 }
