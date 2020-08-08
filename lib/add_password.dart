@@ -27,10 +27,7 @@ class _AddPasswordState extends State<AddPassword> {
             Row(
               // 横
               children: <Widget>[
-                Container(
-                  width: 80,
-                  child: Text('タイトル'),
-                ),
+                _editingGuide('タイトル'),
                 Container(
                   width: 250,
                   child: TextField(
@@ -41,17 +38,12 @@ class _AddPasswordState extends State<AddPassword> {
               ],
             ),
 
-            // 余白
-            Padding(
-              padding: EdgeInsets.all(5.0),
-            ),
+            _margin(5.0),
+
             Row(
               // 横
               children: <Widget>[
-                Container(
-                  width: 80,
-                  child: Text('ID'),
-                ),
+                _editingGuide('ID'),
                 Container(
                   width: 250,
                   child: TextField(
@@ -62,18 +54,12 @@ class _AddPasswordState extends State<AddPassword> {
               ],
             ),
 
-            // 余白
-            Padding(
-              padding: EdgeInsets.all(5.0),
-            ),
+            _margin(5.0),
 
             Row(
               // 横
               children: <Widget>[
-                Container(
-                  width: 80,
-                  child: Text('PW'),
-                ),
+                _editingGuide('パスワード'),
                 Container(
                   width: 250,
                   child: TextField(
@@ -91,9 +77,59 @@ class _AddPasswordState extends State<AddPassword> {
                 ),
               ],
             ),
+
+            _margin(30.0),
+
+            // 追加ボタン
+            _addButton("追加", Colors.white),
           ],
         ),
       ),
     );
+  }
+
+  ///
+  /// 余白
+  /// @param size サイズ
+  Widget _margin(double size) {
+    return Padding(
+      padding: EdgeInsets.all(size),
+    );
+  }
+
+  ///
+  /// 編集内容のタイトル
+  /// @param text
+  ///
+  Widget _editingGuide(String text) {
+    return Container(
+      width: 100,
+      child: Text(text),
+    );
+  }
+
+  ///
+  /// addButton
+  /// @param text 表示文字
+  /// @param color 表示文字色
+  /// 今回はボタンは多様しないようなのでSizedBoxを使用しサイズ調整する
+  /// TODO その他の設定は使いまわすようであれば引数に設定する
+  ///
+  Widget _addButton(String text, Color color) {
+    return SizedBox(
+        width: double.infinity, // specific value
+        child: RaisedButton(
+          child: Text(
+            text,
+            style: TextStyle(
+              color: color,
+            ),
+          ),
+          color: Colors.blue, // Button Color
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          onPressed: () {},
+        ));
   }
 }
