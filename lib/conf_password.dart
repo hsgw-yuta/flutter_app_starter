@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 
 // パスワード確認画面
 class ConfPassword extends StatefulWidget {
+  final int index;
+
+  ConfPassword(this.index);
+
   @override
   _ConfPasswordState createState() => _ConfPasswordState();
 }
@@ -27,28 +31,56 @@ class _ConfPasswordState extends State<ConfPassword> {
   Widget buttons(BuildContext context) {
     return Column(
       children: <Widget>[
-        RaisedButton(
-          child: Text("IDを表示"),
-          color: Colors.white,
-          shape: StadiumBorder(
-            side: BorderSide(color: Colors.black),
-          ),
-          onPressed: () {},
-        ),
-        // 余白
+        SizedBox(
+            width: double.infinity, // match_parent
+            height: 50,
+            child: RaisedButton(
+              child: Text("IDを表示"),
+              color: Colors.white,
+              shape: StadiumBorder(
+                side: BorderSide(color: Colors.black),
+              ),
+              onPressed: () {},
+            )),
         Padding(
           padding: EdgeInsets.all(15.0),
         ),
-
-        RaisedButton(
-          child: Text("パスワードを表示"),
-          color: Colors.white,
-          shape: StadiumBorder(
-            side: BorderSide(color: Colors.black),
-          ),
-          onPressed: () {},
+        SizedBox(
+            width: double.infinity, // match_parent
+            height: 50,
+            child: RaisedButton(
+              child: Text("パスワードを表示"),
+              color: Colors.white,
+              shape: StadiumBorder(
+                side: BorderSide(color: Colors.black),
+              ),
+              onPressed: () {},
+            )),
+        Padding(
+          padding: EdgeInsets.all(20.0),
         ),
+        SizedBox(
+            width: double.infinity, // match_parent
+            height: 50,
+            child: RaisedButton(
+              child: Text(
+                "削除",
+                style: TextStyle(color: Colors.white),
+              ),
+              color: Colors.red,
+              shape: StadiumBorder(
+                side: BorderSide(color: Colors.white),
+              ),
+              onPressed: () {
+                _basckScreen(); // 画面戻る
+              },
+            )),
       ],
     );
+  }
+
+  // 一つ前の画面に戻る
+  void _basckScreen() {
+    Navigator.of(context).pop(widget.index);
   }
 }
