@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterappstarter/conf_password.dart';
+import 'package:flutterappstarter/add_password.dart';
 
 void main() {
   runApp(MyApp());
@@ -56,8 +56,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                     // 画面をStack構造で管理する
                     context,
-                    MaterialPageRoute(builder: (context) => ConfPassword()
-                        //AddPassword(titleList[index]) // 遷移先を指定
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            //ConfPassword()
+                            AddPassword(titleList[index]) // 遷移先を指定
                         ));
               }, // item押下時に画面センチする
             ),
