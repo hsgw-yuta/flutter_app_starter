@@ -33,14 +33,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<String> titleList = ['Amazon', '楽天', 'Yahoo!'];
-
-  // floating onPressed function
-  void _incrementCounter() {
-    setState(() {
-      // Listを追加する
-      titleList.add("追加されたList");
-    });
-  }
+  Map<String, String> accountMap = {
+    'amazon': "A",
+    'rakuten': "R",
+    'yahoo!': "Y"
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +59,14 @@ class _MyHomePageState extends State<MyHomePage> {
                         builder: (context) => ConfPassword(index)));
                 if (result != null) {
                   setState(() {
+                    _mapTest();
+                    // mapをlistに変換
+                    final mapList = accountMap.keys.toList();
+
+                    // delete List&Map
                     titleList.removeAt(result);
+                    accountMap.remove(mapList[result]);
+                    _mapTest();
                   });
                 }
               }, // item押下時に画面センチする
@@ -80,7 +84,10 @@ class _MyHomePageState extends State<MyHomePage> {
           // popされた値を確認
           if (result != null) {
             setState(() {
-              titleList.add(result.toString());
+              final Map<String, String> map = {result[1]: result[2]};
+              titleList.add(result[0]);
+              accountMap.addAll(map);
+              _mapTest();
             });
           }
         },
@@ -88,5 +95,10 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  void _mapTest() {
+    print(titleList);
+    print(accountMap);
   }
 }
