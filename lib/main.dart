@@ -54,11 +54,17 @@ class _MyHomePageState extends State<MyHomePage> {
             ListTile(
               leading: Icon(Icons.vpn_key),
               title: Text(titleList[index]),
-              onTap: () {
-                Navigator.push(
+              onTap: () async {
+                final result = await Navigator.push(
                     // 画面をStack構造で管理する
                     context,
-                    MaterialPageRoute(builder: (context) => ConfPassword()));
+                    MaterialPageRoute(
+                        builder: (context) => ConfPassword(index)));
+                if (result != null) {
+                  setState(() {
+                    titleList.removeAt(result);
+                  });
+                }
               }, // item押下時に画面センチする
             ),
             Divider(),
