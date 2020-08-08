@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // パスワード確認画面
 class ConfPassword extends StatefulWidget {
   final int index;
+  final String id;
+  final String pass;
 
-  ConfPassword(this.index);
+  ConfPassword(this.index, this.id, this.pass);
 
   @override
   _ConfPasswordState createState() => _ConfPasswordState();
@@ -40,7 +43,11 @@ class _ConfPasswordState extends State<ConfPassword> {
               shape: StadiumBorder(
                 side: BorderSide(color: Colors.black),
               ),
-              onPressed: () {},
+              onPressed: () async {
+                final data = ClipboardData(text: widget.id);
+                await Clipboard.setData(data);
+                //_createSnackBar("IDコピー");
+              },
             )),
         Padding(
           padding: EdgeInsets.all(15.0),
@@ -54,7 +61,11 @@ class _ConfPasswordState extends State<ConfPassword> {
               shape: StadiumBorder(
                 side: BorderSide(color: Colors.black),
               ),
-              onPressed: () {},
+              onPressed: () async {
+                final data = ClipboardData(text: widget.pass);
+                await Clipboard.setData(data);
+                //_createSnackBar("パスワードコピー");
+              },
             )),
         Padding(
           padding: EdgeInsets.all(20.0),
@@ -72,7 +83,7 @@ class _ConfPasswordState extends State<ConfPassword> {
                 side: BorderSide(color: Colors.white),
               ),
               onPressed: () {
-                _basckScreen(); // 画面戻る
+                _backScreen(); // 画面戻る
               },
             )),
       ],
@@ -80,7 +91,21 @@ class _ConfPasswordState extends State<ConfPassword> {
   }
 
   // 一つ前の画面に戻る
-  void _basckScreen() {
+  void _backScreen() {
     Navigator.of(context).pop(widget.index);
+  }
+
+  void _createSnackBar(String text) {
+    final snackBar = SnackBar(
+      content: Text(text),
+      action: SnackBarAction(
+        label: 'とじる',
+        onPressed: () {
+          Scaffold.of(context).removeCurrentSnackBar();
+        },
+      ),
+      duration: Duration(seconds: 3),
+    );
+    Scaffold.of(context).showSnackBar(snackBar);
   }
 }
