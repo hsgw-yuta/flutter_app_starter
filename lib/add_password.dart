@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class NextPage extends StatefulWidget {
+class AddPassword extends StatefulWidget {
   final String title;
-  NextPage(this.title);
+  AddPassword(this.title);
 
   @override
-  _State createState() => _State();
+  _AddPasswordState createState() => _AddPasswordState();
 }
 
-class _State extends State<NextPage> {
+class _AddPasswordState extends State<AddPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,14 +24,33 @@ class _State extends State<NextPage> {
               // 横
               children: <Widget>[
                 Container(
-                  width: 50,
+                  width: 80,
+                  child: Text('タイトル'),
+                ),
+                Container(
+                  width: 20,
+                  child: Text(':'),
+                ),
+                Text('テストタイトル')
+              ],
+            ),
+
+            // 余白
+            Padding(
+              padding: EdgeInsets.all(5.0),
+            ),
+            Row(
+              // 横
+              children: <Widget>[
+                Container(
+                  width: 80,
                   child: Text('ID'),
                 ),
                 Container(
                   width: 20,
                   child: Text(':'),
                 ),
-                Text('毎回同じテキストを表示ID')
+                Text('テストID')
               ],
             ),
 
@@ -44,14 +63,14 @@ class _State extends State<NextPage> {
               // 横
               children: <Widget>[
                 Container(
-                  width: 50,
+                  width: 80,
                   child: Text('PW'),
                 ),
                 Container(
                   width: 20,
                   child: Text(':'),
                 ),
-                Text('毎回同じテキストを表示PW')
+                Text('テストPW')
               ],
             ),
           ],
