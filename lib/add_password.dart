@@ -139,13 +139,15 @@ class _AddPasswordState extends State<AddPassword> {
             borderRadius: BorderRadius.circular(10.0),
           ),
           onPressed: () {
-            _basckScreen();
+            _backScreen();
           },
         ));
   }
 
-  // 一つ前の画面に戻る
-  void _basckScreen() {
+  ///
+  /// 一つ前の画面に戻る
+  ///
+  void _backScreen() {
     _popList.add(_titleController.text);
 
     _popList.add(_idController.text);
