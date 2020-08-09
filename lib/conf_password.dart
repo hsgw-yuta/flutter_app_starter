@@ -6,10 +6,11 @@ import 'package:flutterappstarter/edit_password.dart';
 // パスワード確認画面
 class ConfPassword extends StatefulWidget {
   final int index;
+  final String title;
   final String id;
   final String pass;
 
-  ConfPassword(this.index, this.id, this.pass);
+  ConfPassword(this.index, this.title, this.id, this.pass);
 
   @override
   _ConfPasswordState createState() => _ConfPasswordState();
@@ -20,7 +21,7 @@ class _ConfPasswordState extends State<ConfPassword> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("パスワード確認"),
+        title: Text(widget.title),
         actions: [
           // 編集Iconを表示
           IconButton(
