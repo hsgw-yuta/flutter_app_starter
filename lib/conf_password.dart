@@ -31,7 +31,9 @@ class _ConfPasswordState extends State<ConfPassword> {
               final result = await Navigator.push(
                   // 画面をStack構造で管理する
                   context,
-                  MaterialPageRoute(builder: (context) => EditPassword()));
+                  MaterialPageRoute(
+                      builder: (context) => EditPassword(
+                          widget.index, widget.title, widget.id, widget.pass)));
             },
           ),
         ],
@@ -110,17 +112,17 @@ class _ConfPasswordState extends State<ConfPassword> {
     Navigator.of(context).pop(widget.index);
   }
 
-  void _createSnackBar(String text) {
-    final snackBar = SnackBar(
-      content: Text(text),
-      action: SnackBarAction(
-        label: 'とじる',
-        onPressed: () {
-          Scaffold.of(context).removeCurrentSnackBar();
-        },
-      ),
-      duration: Duration(seconds: 3),
-    );
-    Scaffold.of(context).showSnackBar(snackBar);
-  }
+//  void _createSnackBar(String text) {
+//    final snackBar = SnackBar(
+//      content: Text(text),
+//      action: SnackBarAction(
+//        label: 'とじる',
+//        onPressed: () {
+//          Scaffold.of(context).removeCurrentSnackBar();
+//        },
+//      ),
+//      duration: Duration(seconds: 3),
+//    );
+//    Scaffold.of(context).showSnackBar(snackBar);
+//  }
 }
