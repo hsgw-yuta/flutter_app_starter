@@ -59,7 +59,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => ConfPassword(
-                            index, _idList[index], _passList[index])));
+                            index,
+                            titleList[index],
+                            _idList[index],
+                            _passList[index])));
                 if (result != null) {
                   setState(() {
                     _mapTest();
