@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutterappstarter/edit_password.dart';
 
 // パスワード確認画面
 class ConfPassword extends StatefulWidget {
@@ -24,8 +25,12 @@ class _ConfPasswordState extends State<ConfPassword> {
           // 編集Iconを表示
           IconButton(
             icon: Icon(Icons.edit),
-            onPressed: () {
+            onPressed: () async {
               // 押下時編集画面へ遷移する
+              final result = await Navigator.push(
+                  // 画面をStack構造で管理する
+                  context,
+                  MaterialPageRoute(builder: (context) => EditPassword()));
             },
           ),
         ],
