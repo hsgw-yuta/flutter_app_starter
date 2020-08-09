@@ -20,6 +20,15 @@ class _ConfPasswordState extends State<ConfPassword> {
     return Scaffold(
       appBar: AppBar(
         title: Text("パスワード確認"),
+        actions: [
+          // 編集Iconを表示
+          IconButton(
+            icon: Icon(Icons.edit),
+            onPressed: () {
+              // 押下時編集画面へ遷移する
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.all(30.0),
