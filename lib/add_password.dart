@@ -66,20 +66,23 @@ class _AddPasswordState extends State<AddPassword> {
               children: <Widget>[
                 _editingGuide('パスワード'),
                 Container(
-                  width: textFieldWidth,
-                  child: TextField(
-                    // password用の見えない処理
-                    obscureText: _showPassword,
-                    controller: _passwordController,
-                    decoration: InputDecoration(
-                      labelText: "password",
-                      hintText: "ex) 12345",
-                      suffixIcon: Icon(_showPassword
-                          ? Icons.remove_red_eye
-                          : Icons.panorama_fish_eye),
-                    ),
-                  ),
-                ),
+                    width: textFieldWidth,
+                    child: TextField(
+                      obscureText: _showPassword,
+                      controller: _passwordController,
+                      decoration: InputDecoration(
+                          labelText: "Password",
+                          suffixIcon: IconButton(
+                            icon: Icon(_showPassword
+                                ? Icons.visibility_off
+                                : Icons.visibility),
+                            onPressed: () {
+                              this.setState(() {
+                                _showPassword = !_showPassword;
+                              });
+                            },
+                          )),
+                    )),
               ],
             ),
 
