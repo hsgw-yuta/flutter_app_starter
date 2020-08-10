@@ -26,6 +26,7 @@ class _AddPasswordState extends State<AddPassword> {
       appBar: AppBar(
         title: Text("パスワード追加"),
       ),
+      resizeToAvoidBottomPadding: false,
       body: Padding(
         padding: EdgeInsets.all(standardInterval),
         child: Column(
@@ -126,7 +127,8 @@ class _AddPasswordState extends State<AddPassword> {
   ///
   Widget _addButton(String text, Color color) {
     return SizedBox(
-        width: double.infinity, // specific value
+      width: double.infinity, // specific value
+      child: SingleChildScrollView(
         child: RaisedButton(
           child: Text(
             text,
@@ -141,7 +143,9 @@ class _AddPasswordState extends State<AddPassword> {
           onPressed: () {
             _backScreen();
           },
-        ));
+        ),
+      ),
+    );
   }
 
   ///
