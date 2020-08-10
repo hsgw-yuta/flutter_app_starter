@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AddPassword extends StatefulWidget {
-//  final String title;
-//
-//  AddPassword(this.title);
-
   @override
   _AddPasswordState createState() => _AddPasswordState();
 }
@@ -14,7 +10,6 @@ class _AddPasswordState extends State<AddPassword> {
   final double editingGuideSize = 100;
   final double standardInterval = 30.0;
   final double shortInterval = 5.0;
-  List _popList = new List();
   var _showPassword = true; // 表示切替
   var _idController = TextEditingController();
   var _passwordController = TextEditingController(); // password value
@@ -152,12 +147,11 @@ class _AddPasswordState extends State<AddPassword> {
   /// 一つ前の画面に戻る
   ///
   void _backScreen() {
-    _popList.add(_titleController.text);
-
-    _popList.add(_idController.text);
-
-    _popList.add(_passwordController.text);
-
-    Navigator.of(context).pop(_popList);
+    final List<String> res = [
+      _titleController.text,
+      _idController.text,
+      _passwordController.text
+    ];
+    Navigator.of(context).pop(res);
   }
 }
