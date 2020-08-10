@@ -118,18 +118,4 @@ class _ConfPasswordState extends State<ConfPassword> {
     final List<dynamic> res = [type, index, title, id, pass];
     Navigator.of(context).pop(res);
   }
-
-//  void _createSnackBar(String text) {
-//    final snackBar = SnackBar(
-//      content: Text(text),
-//      action: SnackBarAction(
-//        label: 'とじる',
-//        onPressed: () {
-//          Scaffold.of(context).removeCurrentSnackBar();
-//        },
-//      ),
-//      duration: Duration(seconds: 3),
-//    );
-//    Scaffold.of(context).showSnackBar(snackBar);
-//  }
 }
