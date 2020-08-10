@@ -26,7 +26,7 @@ class _AddPasswordState extends State<AddPassword> {
       appBar: AppBar(
         title: Text("パスワード追加"),
       ),
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomPadding: false, // リサイズの固定
       body: Padding(
         padding: EdgeInsets.all(standardInterval),
         child: Column(
