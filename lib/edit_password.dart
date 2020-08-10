@@ -1,19 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutterappstarter/item_resource.dart';
 
-class AddPassword extends StatefulWidget {
+///
+/// EditPassword
+/// 選択したアイテムの情報を編集する画面
+///
+class EditPassword extends StatefulWidget {
+  final int index;
+
+  EditPassword(this.index);
+
   @override
-  _AddPasswordState createState() => _AddPasswordState();
+  _EditPasswordState createState() => _EditPasswordState();
 }
 
-class _AddPasswordState extends State<AddPassword> {
+class _EditPasswordState extends State<EditPassword> {
   final double textFieldWidth = 250;
   final double editingGuideSize = 100;
   final double standardInterval = 30.0;
   final double shortInterval = 5.0;
+
   var _showPassword = true; // 表示切替
-  var _idController = TextEditingController();
-  var _passwordController = TextEditingController(); // password value
-  var _titleController = TextEditingController(); // title value
+  var _titleController = new TextEditingController(); // title value
+  var _idController = new TextEditingController();
+  var _passwordController = new TextEditingController(); // password value
+
+  final List<String> _titleList = ItemStore().getList('t');
+  final List<String> _idList = ItemStore().getList('i');
+  final List<String> _passList = ItemStore().getList('p');
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // TextEditingController　init
+    _titleController.text = _titleList[widget.index];
+    _idController.text = _idList[widget.index];
+    _passwordController.text = _passList[widget.index];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +57,7 @@ class _AddPasswordState extends State<AddPassword> {
                 _editingGuide('タイトル'),
                 Container(
                   width: textFieldWidth,
-                  child: TextField(
+                  child: TextFormField(
                     controller: _titleController,
                     decoration: InputDecoration(
                         labelText: "Title Name", hintText: "ex) GitHubAccount"),
@@ -50,7 +74,7 @@ class _AddPasswordState extends State<AddPassword> {
                 _editingGuide('ID'),
                 Container(
                   width: textFieldWidth,
-                  child: TextField(
+                  child: TextFormField(
                     controller: _idController,
                     decoration:
                         InputDecoration(labelText: "ID", hintText: "ex) asas"),
@@ -67,7 +91,7 @@ class _AddPasswordState extends State<AddPassword> {
                 _editingGuide('パスワード'),
                 Container(
                   width: textFieldWidth,
-                  child: TextField(
+                  child: TextFormField(
                     // password用の見えない処理
                     obscureText: _showPassword,
                     controller: _passwordController,
@@ -84,9 +108,24 @@ class _AddPasswordState extends State<AddPassword> {
             ),
 
             _margin(standardInterval),
-
             // 追加ボタン
-            _addButton("追加", Colors.white),
+            SizedBox(
+                width: double.infinity, // match_parent
+                height: 50,
+                child: RaisedButton(
+                  child: Text(
+                    "編集",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  color: Colors.blue,
+                  shape: StadiumBorder(
+                    side: BorderSide(color: Colors.white),
+                  ),
+                  onPressed: () {
+                    _backScreen("e", widget.index, _titleController.text,
+                        _idController.text, _passwordController.text); // 画面戻る
+                  },
+                )),
           ],
         ),
       ),
@@ -108,50 +147,17 @@ class _AddPasswordState extends State<AddPassword> {
   ///
   Widget _editingGuide(String text) {
     return Container(
-      width: editingGuideSize,
+      width: 100.0,
       child: Text(text),
-    );
-  }
-
-  ///
-  /// addButton
-  /// @param text 表示文字
-  /// @param color 表示文字色
-  /// 今回はボタンは多様しないようなのでSizedBoxを使用しサイズ調整する
-  /// TODO その他の設定は使いまわすようであれば引数に設定する
-  ///
-  Widget _addButton(String text, Color color) {
-    return SizedBox(
-      width: double.infinity, // specific value
-      child: SingleChildScrollView(
-        child: RaisedButton(
-          child: Text(
-            text,
-            style: TextStyle(
-              color: color,
-            ),
-          ),
-          color: Colors.blue, // Button Color
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          onPressed: () {
-            _backScreen();
-          },
-        ),
-      ),
     );
   }
 
   ///
   /// 一つ前の画面に戻る
   ///
-  void _backScreen() {
-    final List<String> res = [
-      _titleController.text,
-      _idController.text,
-      _passwordController.text
-    ];
+  void _backScreen(
+      String type, dynamic index, String title, String id, String pass) {
+    final List<dynamic> res = [type, index, title, id, pass];
     Navigator.of(context).pop(res);
   }
 }
